@@ -1,0 +1,115 @@
+<!DOCTYPE html> 
+
+<html lang="et"> 
+
+<head> 
+
+<meta charset="UTF-8"> 
+
+<title>Parooligeneraator</title> 
+
+<style> 
+
+body { font-family: Arial, sans-serif; background-color: #f0f8ff; margin: 0; padding: 50px 20px; display: flex; justify-content: center; } 
+
+.kast { border: 2px dashed #007acc; padding: 30px; background: white; border-radius: 10px; max-width: 500px; width: 100%; box-sizing: border-box; } 
+
+h1 { color: #007acc; text-align: center; margin-top: 0; } 
+
+.form-group { margin-bottom: 15px; color: #333; } 
+
+input[type="number"] { width: 50px; padding: 5px; } 
+
+.result-box { background: #f4f6f7; padding: 15px; border-radius: 5px; font-family: monospace; font-size: 1.2em; text-align: center; border: 1px solid #ccc; margin: 15px 0; word-break: break-all; } 
+
+.btn-gen { width: 100%; background: #007acc; color: white; padding: 10px; border: none; border-radius: 5px; font-weight: bold; cursor: pointer; } 
+
+.btn-gen:hover { background: #005999; } 
+
+.btn-copy { background: #2ecc71; color: white; border: none; padding: 5px 10px; border-radius: 3px; cursor: pointer; margin-bottom: 15px; } 
+
+.back-link { display: block; text-align: center; margin-top: 15px; color: #666; text-decoration: none; } 
+
+</style> 
+
+</head> 
+
+<body> 
+
+<div class="kast"> 
+
+<h1>🔒 Parooligeneraator</h1> 
+
+<div class="form-group"> 
+
+    <label>Pikkus (8-32): </label> 
+
+    <input type="number" id="length" min="8" max="32" value="12"> 
+
+</div> 
+
+<div class="form-group"> 
+
+    <input type="checkbox" id="numbers" checked> <label for="numbers">Kaasa numbrid (0-9)</label> 
+
+</div> 
+
+<div class="form-group"> 
+
+    <input type="checkbox" id="symbols" checked> <label for="symbols">Kaasa erimärgid (!@#$)</label> 
+
+</div> 
+
+<button class="btn-gen" onclick="generatePassword()">Genereeri</button> 
+
+<div class="result-box" id="passwordResult">***</div> 
+
+<center><button class="btn-copy" onclick="copyPassword()">Kopeeri</button></center> 
+
+<a href="index.html" class="back-link">← Tagasi pealehele</a> 
+
+</div> 
+
+ 
+
+<script> 
+
+function generatePassword() { 
+
+    const length = document.getElementById('length').value; 
+
+    const num = document.getElementById('numbers').checked; 
+
+    const sym = document.getElementById('symbols').checked; 
+
+    let chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'; 
+
+    if (num) chars += '0123456789'; 
+
+    if (sym) chars += '!@#$%^&*()_+'; 
+
+    let pass = ''; 
+
+    for (let i = 0; i < length; i++) { 
+
+        pass += chars.charAt(Math.floor(Math.random() * chars.length)); 
+
+    } 
+
+    document.getElementById('passwordResult').innerText = pass; 
+
+} 
+
+function copyPassword() { 
+
+    const text = document.getElementById('passwordResult').innerText; 
+
+    if(text !== '***') { navigator.clipboard.writeText(text); alert('Kopeeritud!'); } 
+
+} 
+
+</script> 
+
+</body> 
+
+</html
